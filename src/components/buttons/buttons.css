@@ -1,0 +1,45 @@
+.menu-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(40vw, calc(100vh - 100px)*0.8);
+  height: min(40vw, calc(100vh - 100px)*0.8);
+  border-width: 0px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 25px 8px rgba(56, 70, 84, 0.5);
+}
+.menu-button:hover {
+  cursor: pointer;
+}
+
+.menu-button-header {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20%;
+  margin-top: 5%;
+}
+
+.menu-button-header-text {
+  font-size: min(5vw, calc(100vh - 100px)*0.1);
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  color: #A9936D;
+}
+
+.menu-button-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  margin-bottom: 15%;
+}
+
+.menu-button-body-text {
+  font-size: min(20vw, calc(100vh - 100px)*0.4);
+}
