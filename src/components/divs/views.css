@@ -1,0 +1,97 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100px;
+  background-color: #485A72;
+  box-sizing: border-box;
+}
+
+.header-text {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  color: #A9936D;
+}
+
+.header-back-button {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  left: 20px;
+  top: 12.5px;
+  align-items: center;
+  justify-content: center;
+}
+.header-back-button:hover {
+  cursor: pointer;
+}
+
+.header-back-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #A9936D;
+}
+
+.item-container {
+  display: flex;
+  padding: 10px;
+  background-color: #ffffff;
+  border-bottom-width: 1px;
+  flex-direction: row;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 100;
+}
+.item-container:hover {
+  cursor: pointer;
+  background-color: #485A72;
+  color:#A9936D
+}
+
+.item-text {
+  font-size: 16px;
+  color: #485A72;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 12.5px;
+  background-color: #f0f0f0;
+  color: #000000;
+}
+.delete-button:hover {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+
+.marker {
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.selected {
+  background-color: #A9936D;
+  z-index: 6;
+}
+
+.default {
+  background-color: #485A72;
+  z-index: 5;
+}

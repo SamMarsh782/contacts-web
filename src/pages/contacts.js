@@ -2,7 +2,7 @@ import './pages.css';
 
 import { useNavigate } from 'react-router-dom';
 
-import Header from '../components/views/header';
+import Header from '../components/divs/header';
 import MenuButton from '../components/buttons/menuButton';
 
 function Contacts() {

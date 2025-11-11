@@ -1,3 +1,23 @@
+.button {
+  height: 50px;
+  display: flex;
+  margin: 10px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.button-text {
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
 .menu-button {
   display: flex;
   flex-direction: column;
