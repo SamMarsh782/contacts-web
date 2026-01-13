@@ -146,7 +146,7 @@ function External() {
       contacts.filter(item =>
         item.Person_Name.toLowerCase().includes(search.toLowerCase()) ||
         item.Person_Phone?.toString().includes(search) ||
-        item.Person_Email?.toLowerCase().includes(search.toLowerCase())
+        item.Company_ID?.toString().includes(search)
       )
     );
   }, [contacts, search]);
@@ -191,7 +191,7 @@ function External() {
               ref={searchInputRef}
               className="search-input"
               type="string"
-              placeholder="Name, Phone #, or Email"
+              placeholder="Name, Phone #, or Company ID"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onFocus={() => {
@@ -200,7 +200,7 @@ function External() {
               onBlur={() => {
                 setTimeout(() => {
                   setFocused(false);
-                }, 100);
+                }, 350);
               }}
             />
           </div>
@@ -226,7 +226,7 @@ function External() {
                 items={[
                   {"field":"Name", "value":contact.Person_Name},
                   {"field":"Phone", "value":contact.Person_Phone},
-                  {"field":"Email", "value":contact.Person_Email}
+                  {"field":"Company ID", "value":contact.Company_ID}
                 ]}
                 visible={focused}
                 name={contact.Person_Name}

@@ -191,7 +191,7 @@ function Internal() {
               onBlur={() => {
                 setTimeout(() => {
                   setFocused(false);
-                }, 100);
+                }, 350);
               }}
             />
           </div>

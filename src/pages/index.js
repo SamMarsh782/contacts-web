@@ -48,11 +48,27 @@ function Home() {
     setFilteredSuggestions(
       stops.filter(item =>
         item.DESCRIPTION.toLowerCase().includes(search.toLowerCase()) ||
-        item.ACTUAL_SEQUENCE_NUM.toString().includes(search.toLowerCase()) ||
+        item.LOCATION_ID?.toString().includes(search.toLowerCase()) ||
         item.ROUTE_ID.toLowerCase().includes(search.toLowerCase())
       )
     );
   }, [stops, search]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowLeft') {
+        navigateStop('prev');
+      } else if (event.key === 'ArrowRight') {
+        navigateStop('next');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedStop, stops]);
 
   const setLatest = (route) => {
     const filteredStops = stops.filter(stop => stop.ROUTE_ID === route);
@@ -82,6 +98,27 @@ function Home() {
     console.log("Latest arrival in EST (24-hour):", latestEST);
   };
 
+  const navigateStop = (direction) => {
+    if (!selectedStop?.ROUTE_ID) return;
+    
+    const routeStops = stops
+      .filter(stop => stop.ROUTE_ID === selectedStop.ROUTE_ID)
+      .sort((a, b) => a.ACTUAL_SEQUENCE_NUM - b.ACTUAL_SEQUENCE_NUM);
+    
+    const currentIndex = routeStops.findIndex(
+      stop => stop.ACTUAL_SEQUENCE_NUM === selectedStop.ACTUAL_SEQUENCE_NUM
+    );
+    
+    if (currentIndex === -1) return;
+    
+    const nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+    
+    if (nextIndex >= 0 && nextIndex < routeStops.length) {
+      const nextStop = routeStops[nextIndex];
+      setSelectedStop(nextStop);
+      setSearch(nextStop.DESCRIPTION);
+    }
+  };
 
   if(loading) {
     return (
@@ -175,13 +212,17 @@ function Home() {
           </div>
           <div className="map-window">
             <MapView stops={stops.filter((stop) => stop.ROUTE_ID === selectedStop.ROUTE_ID)} setSearch={setSearch} selected={selectedStop} setSelected={setSelectedStop} />
+            <div className="map-navigation">
+              <button className="map-nav-button" onClick={() => navigateStop('prev')}>← Previous</button>
+              <button className="map-nav-button" onClick={() => navigateStop('next')}>Next →</button>
+            </div>
           </div>
           <div className="search-container">
             <div className="search-bar">
               <input
                 className="search-input"
                 type="string"
-                placeholder="Customer"
+                placeholder="Stop Name, ID, or Route"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 onFocus={() => {
@@ -210,8 +251,8 @@ function Home() {
                   }}
                   items={[
                     {"field":"Route", "value":stop.ROUTE_ID},
-                    {"field":"Description", "value":stop.DESCRIPTION},
-                    {"field":"Stop #", "value":stop.ACTUAL_SEQUENCE_NUM}
+                    {"field":"Stop ID", "value":stop.LOCATION_ID},
+                    {"field":"Stop", "value":stop.DESCRIPTION}
                   ]}
                   visible={focused}
                   name={stop.DESCRIPTION}
